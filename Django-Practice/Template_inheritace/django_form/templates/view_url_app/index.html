@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends 'view_url_app/base.html' %}
+
+{% load my_filters %}
+
+<div class="container">
+  {% block body_block %}
+
+    <h1 class="text-center">I am Index</h1>
+    <h2 class="text-center"> {{ text_1.release_date|custom_filter}} </h2>
+
+  {% endblock %}
+</div>
