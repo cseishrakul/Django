@@ -1,0 +1,16 @@
+<!Doctype html>
+
+{% extends 'view_url_app/base.html' %}
+
+{% block body_block %}
+  <h2 class="">List of Musician</h2>
+  <ul>
+    {% if musician_list %}
+      {% for musician in musician_list %}
+        <li> <a href="{% url 'view_url_app:album_list' artist_id=musician.id %}" class="">{{ musician.first_name }}  {{ musician.last_name }}</a> </li>
+      {% endfor %}
+    {% else %}
+      <h4 class="">No Musician in the list</h4>
+    {% endif %}
+  </ul>
+{% endblock %}

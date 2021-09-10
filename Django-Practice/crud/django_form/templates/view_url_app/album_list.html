@@ -1,0 +1,40 @@
+<!Doctype html>
+
+{% extends 'view_url_app/base.html' %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="p-5">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="">Artist Information</h2>
+        </div>
+        <div class="card-body">
+          <h4 class=""> Artist Name: {{ artist_info.first_name }}  {{ artist_info.last_name }} </h4>
+          <h4 class=""> Artist Instrument: {{ artist_info.instrument }} </h4>
+          <h4 class=""> Artist Rating: {{ artist_rating.num_starts__avg }} </h4>
+          <a href="{% url 'view_url_app:edit_artist' artist_id=artist_info.id %}" class="btn btn-primary">Edit</a>
+          <hr>
+          <h2 class="">Album List :</h2>
+          <table class="table table-bordered table-striped text-center">
+            <tr>
+              <th>Name</th>
+              <th>Release Date</th>
+              <th>Rating</th>
+            </tr>
+            {% for album in album_list %}
+            <tr>
+              <td> <a href="{% url 'view_url_app:edit_album' album_id=album.id %}" class="">{{ album.name }}</a> </td>
+              <td> {{ album.release_date }} </td>
+              <td> {{ album.num_starts }} </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <br>
+      
+      <a href="{% url 'view_url_app:delete_artist' artist_id=artist_info.id %}" class="btn btn-danger" onclick="return confirm('Delete Musician?')">Delete</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!Doctype html>
+
+{% extends 'view_url_app/base.html' %}
+
+{% block body_block %}
+  <div class="container">
+    <h3 class="">Edit Artist</h3>
+    <form action="" method="POST">
+      {{ edit_form.as_p }}
+      {% csrf_token %}
+      <input type="submit" name="submit" value="Update" class="btn btn-danger">
+    </form>
+  </div>
+{% endblock %}

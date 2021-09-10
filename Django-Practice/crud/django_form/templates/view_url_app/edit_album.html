@@ -1,0 +1,23 @@
+<!Doctype html>
+
+{% extends 'view_url_app/base.html' %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="p-5">
+      <div class="card p-3">
+        {% if success_text %}
+        <div class="alert alert-success text-center"> {{ success_text }} </div>
+        {% endif %}
+        <h3 class="">Edit Album</h3>
+
+        <form action="" class="" method="POST">
+          {{ edit_form.as_p }}
+          {% csrf_token %}
+          <input type="submit" name="submit" value="Update" class="btn btn-info">
+        </form>
+      </div>
+      <a href="{% url 'view_url_app:delete_album' album_id=album_id %}" class="btn btn-danger mt-4" onclick="return confirm('Delete this Album?')">Delete</a>
+    </div>
+  </div>
+{% endblock %}
