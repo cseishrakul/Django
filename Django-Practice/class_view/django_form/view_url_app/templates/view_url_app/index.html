@@ -1,0 +1,14 @@
+{% extends 'view_url_app/based.html' %}
+
+{% block body_block %}
+  <!-- <h1 class="text-center"> {{ sample_data_1 }} </h1> -->
+  <!-- <h1 class="text-center"> {{ sample_data_2 }} </h1> -->
+  <hr>
+  <hr>
+
+  <ul>
+    {% for musician in musician_list %}
+      <li> <a href="{% url 'view_url_app:musician_detail' pk=musician.pk %}" class="">{{ musician.first_name }}  {{ musician.last_name }}</a> </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
