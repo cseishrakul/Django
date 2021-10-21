@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_blog %} {{blog.blog_title}} {% endblock %}
+{% block body_block %}
+  {% if blog.author == user %}
+    <form method="POST">
+      {{form|crispy}}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-info">Update</button>
+    </form>
+  {% else %}
+    <p class="">You are not allowed to view this!!</p>  
+  {% endif %}
+{% endblock %}

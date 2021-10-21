@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_blog %} {{ blog.blog_title }} {% endblock %}
+{% block body_block %}
+  <div class="mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="">{{ blog.blog_title }}</h2>
+        <h4 class="">Posted By: {{ blog.author }}</h4>
+        <i><h6>Published Date: {{ blog.publish_date }}</h6></i>
+        <i><h6>Updated Date: {{ blog.update_date }}</h6></i>
+        <h6 class=""> {{blog.liked_blog.count}} Likes | {{blog.blog_comment.count}} Comments </h6>
+
+      </div>
+      <div class="col-md-6">
+        <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" width="100%" class="">
+      </div>
+      <p class="">{{blog.blog_content|linebreaks}}</p>
+      <hr>
+    </div>
+    {% if not liked %}
+      <a href="{% url 'App_Blog:liked_post' pk=blog.pk %}" class=""> <i class="far fa-thumbs-up fa-2x"></i> </a>
+    {% else %}
+      <a href="{% url 'App_Blog:unliked_post' pk=blog.pk %}" class=""> <i class="far fa-thumbs-down fa-2x"></i> </a>
+    {% endif %}
+    <div class="row">
+      <div class="col-md-6">
+        <hr>
+        <h4 class=""> Comments: </h4>>
+        {% for comment in blog.blog_comment.all %}
+          <p class="">
+            <a href="#" class=""> @{{comment.user}} </a> {{comment.comment}}<br>
+            <h6 class=""> {{comment.comment_date}} </h6>
+          </p>
+        {% endfor %}
+      </div>
+      <div class="col-md-6">
+        <form method="POST">
+          {{comment_form|crispy}}
+          {% csrf_token %}
+          <button class="btn btn-primary">Comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
